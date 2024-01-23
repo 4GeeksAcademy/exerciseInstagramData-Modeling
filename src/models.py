@@ -36,15 +36,15 @@ class Post(Base):
     post_text = Column(String(250))
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
-    post_id = Column(Integer, ForeignKey('post.ID'))
-    post = relationship('Post')
+    
 
 class Media(Base):
     __tablename__ = 'media'
     ID = Column(Integer, primary_key=True)
     type = Column(String(250)) #enum
     url = Column(String(250))
-
+    post_id = Column(Integer, ForeignKey('post.ID'))
+    post = relationship('Post')
 
 class Follower(Base):
     __tablename__ = 'follower'
@@ -54,8 +54,6 @@ class Follower(Base):
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
     
-
-
 
 
     def to_dict(self):
